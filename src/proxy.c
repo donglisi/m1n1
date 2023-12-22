@@ -499,39 +499,6 @@ int proxy_process(ProxyRequest *request, ProxyReply *reply)
         case P_HV_ADD_TIME:
             hv_add_time(request->args[0]);
             break;
-
-        case P_FB_INIT:
-            fb_init(request->args[0]);
-            break;
-        case P_FB_SHUTDOWN:
-            fb_shutdown(request->args[0]);
-            break;
-        case P_FB_BLIT:
-            // HACK: Running out of args, stash pix fmt in high bits of stride...
-            fb_blit(request->args[0], request->args[1], request->args[2], request->args[3],
-                    (void *)request->args[4], (u32)request->args[5], request->args[5] >> 32);
-            break;
-        case P_FB_UNBLIT:
-            fb_unblit(request->args[0], request->args[1], request->args[2], request->args[3],
-                      (void *)request->args[4], request->args[5]);
-            break;
-        case P_FB_FILL:
-            fb_fill(request->args[0], request->args[1], request->args[2], request->args[3],
-                    int2rgb(request->args[4]));
-            break;
-        case P_FB_CLEAR:
-            fb_clear(int2rgb(request->args[0]));
-            break;
-        case P_FB_DISPLAY_LOGO:
-            fb_display_logo();
-            break;
-        case P_FB_RESTORE_LOGO:
-            fb_restore_logo();
-            break;
-        case P_FB_IMPROVE_LOGO:
-            fb_improve_logo();
-            break;
-
         case P_PCIE_INIT:
             pcie_init();
             break;

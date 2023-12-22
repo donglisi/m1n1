@@ -109,8 +109,6 @@ void run_actions(void)
         return;
     }
 
-    fb_set_active(true);
-
     printf("No valid payload found\n");
 
 #ifndef BRINGUP
@@ -146,18 +144,6 @@ void m1n1_main(void)
 #ifndef BRINGUP
     pmgr_init();
 
-#ifdef USE_FB
-    // Kick DCP to sleep, so dodgy monitors which cause reconnect cycles don't cause us to lose the
-    // framebuffer.
-    fb_init(false);
-    fb_display_logo();
-#ifdef FB_SILENT_MODE
-    fb_set_active(!cur_boot_args.video.display);
-#else
-    fb_set_active(true);
-#endif
-#endif
-
     cpufreq_fixup();
     sep_init();
 #endif
@@ -174,9 +160,6 @@ void m1n1_main(void)
 
     exception_shutdown();
 #ifndef BRINGUP
-#ifdef USE_FB
-    fb_shutdown(next_stage.restore_logo);
-#endif
     mmu_shutdown();
 #endif
 

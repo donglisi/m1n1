@@ -97,7 +97,7 @@ OBJECTS := \
 	dapf.o \
 	devicetree.o \
 	exception.o exception_asm.o \
-	fb.o font.o font_retina.o \
+	font.o font_retina.o \
 	firmware.o \
 	gxf.o gxf_asm.o \
 	heapblock.o \
