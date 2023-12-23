@@ -52,7 +52,6 @@ static struct hv_secondary_info_t hv_secondary_info;
 
 void hv_init(void)
 {
-    pcie_shutdown();
     // reenable hpm interrupts for the guest for unused iodevs
     smp_start_secondaries();
     smp_set_wfe_mode(true);

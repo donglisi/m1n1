@@ -499,12 +499,6 @@ int proxy_process(ProxyRequest *request, ProxyReply *reply)
         case P_HV_ADD_TIME:
             hv_add_time(request->args[0]);
             break;
-        case P_PCIE_INIT:
-            pcie_init();
-            break;
-        case P_PCIE_SHUTDOWN:
-            pcie_shutdown();
-            break;
         case P_MCC_GET_CARVEOUTS:
             reply->retval = (u64)mcc_carveouts;
             break;
