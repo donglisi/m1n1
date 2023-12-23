@@ -62,7 +62,7 @@ LDFLAGS := -EL -maarch64elf --no-undefined -X -Bsymbolic \
 	-z nocopyreloc --gc-sections -pie
 
 MINILZLIB_OBJECTS := $(patsubst %,minilzlib/%, \
-	dictbuf.o inputbuf.o lzma2dec.o lzmadec.o rangedec.o)
+	dictbuf.o inputbuf.o lzma2dec.o lzmadec.o)
 
 TINF_OBJECTS := $(patsubst %,tinf/%, \
 	adler32.o crc32.o tinfgzip.o tinflate.o tinfzlib.o)
