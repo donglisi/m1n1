@@ -136,7 +136,6 @@ void m1n1_main(void)
 
 #ifndef BRINGUP
     gxf_init();
-    mcc_init();
     mmu_init();
     aic_init();
 #endif

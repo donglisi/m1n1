@@ -413,9 +413,6 @@ static void mmu_add_default_mappings(void)
      */
     mmu_add_mapping(ram_base, ram_base, cur_boot_args.mem_size_actual, MAIR_IDX_NORMAL, PERM_RWX);
 
-    /* Unmap carveout regions */
-    mcc_unmap_carveouts();
-
     /*
      * Remap m1n1 executable code as RX.
      */

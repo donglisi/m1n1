@@ -107,7 +107,6 @@ OBJECTS := \
 	iova.o \
 	kboot.o \
 	main.o \
-	mcc.o \
 	memory.o memory_asm.o \
 	payload.o \
 	pmgr.o \
