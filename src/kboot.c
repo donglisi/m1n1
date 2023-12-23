@@ -1856,18 +1856,6 @@ static int dt_set_isp_fwdata(void)
     if (firmware_set_fdt(dt, fdt_node, "apple,firmware-compat", compat) < 0)
         bail("FDT: Could not set apple,firmware-compat for %s\n", fdt_path);
 
-    if (isp_get_heap(&phys, &iova, &size)) {
-        const char *status = fdt_getprop(dt, fdt_node, "status", NULL);
-
-        if (!status || strcmp(status, "disabled")) {
-            printf("FDT: ISP enabled but not initialized, disabling\n");
-            if (fdt_setprop_string(dt, fdt_node, "status", "disabled") < 0)
-                bail("FDT: failed to set status property of ISP\n");
-        }
-
-        return 0;
-    }
-
     int adt_node = adt_path_offset(adt, "/arm-io/isp");
     if (adt_node < 0)
         adt_node = adt_path_offset(adt, "/arm-io/isp0");
@@ -2155,9 +2143,6 @@ int kboot_prepare_dt(void *fdt)
         dt = NULL;
     }
 
-    /* Need to init ISP early to carve out heap */
-    isp_init();
-
     dt_bufsize = fdt_totalsize(fdt);
     assert(dt_bufsize);
 
@@ -2204,8 +2189,6 @@ int kboot_prepare_dt(void *fdt)
     if (dt_reserve_asc_firmware("/arm-io/sio", NULL, "sio", true, 0))
         return -1;
     if (dt_set_sio_fwdata())
-        return -1;
-    if (dt_reserve_asc_firmware("/arm-io/isp", "/arm-io/isp0", "isp", false, isp_iova_base()))
         return -1;
     if (dt_set_isp_fwdata())
         return -1;
