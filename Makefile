@@ -114,7 +114,6 @@ OBJECTS := \
 	ringbuffer.o \
 	sart.o \
 	sep.o \
-	sio.o \
 	smc.o \
 	smp.o \
 	start.o \
