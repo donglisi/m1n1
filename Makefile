@@ -94,7 +94,6 @@ OBJECTS := \
 	chickens_icestorm.o \
 	clk.o \
 	cpufreq.o \
-	dapf.o \
 	devicetree.o \
 	exception.o exception_asm.o \
 	font.o font_retina.o \

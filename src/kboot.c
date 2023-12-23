@@ -2150,8 +2150,6 @@ int kboot_boot(void *kernel)
     tunables_apply_static();
     clk_init();
 
-    dapf_init_all();
-
     printf("Setting SMP mode to WFE...\n");
     smp_set_wfe_mode(true);
     printf("Preparing to boot kernel at %p with fdt at %p\n", kernel, dt);
