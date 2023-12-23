@@ -485,10 +485,6 @@ int proxy_process(ProxyRequest *request, ProxyReply *reply)
             break;
         case P_DISPLAY_IS_EXTERNAL:
             break;
-        case P_CPUFREQ_INIT:
-            reply->retval = cpufreq_init();
-            break;
-
         default:
             reply->status = S_BADCMD;
             break;

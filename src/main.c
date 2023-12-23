@@ -143,7 +143,6 @@ void m1n1_main(void)
 #ifndef BRINGUP
     pmgr_init();
 
-    cpufreq_fixup();
     sep_init();
 #endif
 
