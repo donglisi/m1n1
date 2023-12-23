@@ -114,7 +114,6 @@ OBJECTS := \
 	pmgr.o \
 	proxy.o \
 	ringbuffer.o \
-	rtkit.o \
 	sart.o \
 	sep.o \
 	sio.o \
