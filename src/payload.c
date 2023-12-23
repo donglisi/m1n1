@@ -79,29 +79,6 @@ static void *decompress_gz(void *p, size_t size)
     return ((u8 *)p) + source_len;
 }
 
-static void *decompress_xz(void *p, size_t size)
-{
-    uint32_t source_len = size, dest_len = 1 << 30; // 1 GiB should be enough hopefully
-
-    // Start at the end of the heap area, no allocation yet. The following code must not use
-    // malloc or heapblock, until finalize_uncompression is called.
-    void *dest = heapblock_alloc_aligned(0, KERNEL_ALIGN);
-
-    printf("Uncompressing... ");
-    int ret = XzDecode(p, &source_len, dest, &dest_len);
-
-    if (!ret) {
-        printf("XZ decode failed\n");
-        return NULL;
-    }
-
-    printf("%d bytes uncompressed to %d bytes\n", source_len, dest_len);
-
-    finalize_uncompression(dest, dest_len);
-
-    return ((u8 *)p) + source_len;
-}
-
 static void *load_fdt(void *p, size_t size)
 {
     if (fdt_node_check_compatible(p, 0, expect_compatible) == 0) {
@@ -213,9 +190,6 @@ static void *load_one_payload(void *start, size_t size)
     if (!memcmp(p, gz_magic, sizeof gz_magic)) {
         printf("Found a gzip compressed payload at %p\n", p);
         return decompress_gz(p, size);
-    } else if (!memcmp(p, xz_magic, sizeof xz_magic)) {
-        printf("Found an XZ compressed payload at %p\n", p);
-        return decompress_xz(p, size);
     } else if (!memcmp(p, fdt_magic, sizeof fdt_magic)) {
         return load_fdt(p, size);
     } else if (!memcmp(p, cpio_magic, sizeof cpio_magic)) {

@@ -299,17 +299,6 @@ int proxy_process(ProxyRequest *request, ProxyReply *reply)
         case P_MMU_INIT_SECONDARY:
             mmu_init_secondary(request->args[0]);
             break;
-
-        case P_XZDEC: {
-            uint32_t destlen, srclen;
-            destlen = request->args[3];
-            srclen = request->args[1];
-            if (XzDecode((void *)request->args[0], &srclen, (void *)request->args[2], &destlen))
-                reply->retval = destlen;
-            else
-                reply->retval = ~0L;
-            break;
-        }
         case P_GZDEC: {
             unsigned int destlen, srclen;
             destlen = request->args[3];
